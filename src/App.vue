@@ -1,17 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <h3>Select calendar view</h3>
+      <div>
+        <button v-for="calendarType in calendarTypes"
+                :key="calendarType"
+                @click="changeCalendarType(calendarType)"
+        >{{ calendarType | capitalize }} view</button>
+      </div>
+    </div>
+    <Calendar :type="selectedCalendarType"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import { CALENDAR_TYPES, CALENDAR_TYPE_MONTH } from '@/constants';
+import Calendar from '@/components/Calendar.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Calendar,
+  },
+  data() {
+    return {
+      calendarTypes: CALENDAR_TYPES,
+      selectedCalendarType: CALENDAR_TYPE_MONTH,
+    };
+  },
+  methods: {
+    changeCalendarType(type) {
+      this.selectedCalendarType = type;
+    },
   },
 };
 </script>
