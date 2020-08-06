@@ -1,4 +1,4 @@
-export default {
+export const localeMixin = {
   methods: {
     /**
      * Get locale month name of date
@@ -47,3 +47,5 @@ export default {
     },
   },
 };
+
+export default localeMixin;

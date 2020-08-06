@@ -1,29 +1,21 @@
 # teba-calendar
 
-## Project setup
-```
-npm install
-```
+## Run project
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### To install local
 
-### Compiles and minifies for production
-```
-npm run build
-```
+#### 1. Install dependencies
+> npm install
 
-### Run your unit tests
-```
-npm run test:unit
-```
+#### 2. Run serve (development) 
+> npm run serve
 
-### Lints and fixes files
-```
-npm run lint
-```
+#### 3. Go to browser to <http://localhost:8080>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### To use docker container
+
+#### 1. use docker-compose
+> docker-compose up
+
+#### 2. Go to browser to <http://localhost:8888>

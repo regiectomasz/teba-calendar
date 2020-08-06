@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  teba-calendar:
+    container_name: teba-calendar
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '8888:8080'

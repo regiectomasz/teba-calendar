@@ -1,21 +1,29 @@
 <template>
   <div id="app">
-    <div>
-      <h3>Select calendar view</h3>
-      <div>
-        <button v-for="calendarType in calendarTypes"
-                :key="calendarType"
-                @click="changeCalendarType(calendarType)"
-        >{{ calendarType | capitalize }} view</button>
-      </div>
+    <div class="container">
+      <Calendar>
+        <template slot="control" slot-scope="{ types, changeType }">
+          <div>
+            <div class="btn-group">
+              <button class="btn btn-primary"
+                      v-for="type in types"
+                      :key="type"
+                      @click="changeType(type)"
+              >
+                {{ type | capitalize }} view
+              </button>
+            </div>
+          </div>
+        </template>
+      </Calendar>
     </div>
-    <Calendar :type="selectedCalendarType"/>
   </div>
 </template>
 
 <script>
-import { CALENDAR_TYPES, CALENDAR_TYPE_MONTH } from '@/constants';
+import { eventsMixin } from '@/mixins';
 import Calendar from '@/components/Calendar.vue';
+import { CALENDAR_TYPE_MONTH } from '@/constants';
 
 export default {
   name: 'App',
@@ -24,25 +32,35 @@ export default {
   },
   data() {
     return {
-      calendarTypes: CALENDAR_TYPES,
-      selectedCalendarType: CALENDAR_TYPE_MONTH,
+      type: CALENDAR_TYPE_MONTH,
     };
   },
+  mixins: [eventsMixin],
+  created() {
+    const eventsList = this.fetchEvents();
+    if (eventsList.length === 0) {
+      this.saveEvents(this.generateEventsInMonthFromDate());
+    }
+  },
   methods: {
-    changeCalendarType(type) {
-      this.selectedCalendarType = type;
-    },
   },
 };
 </script>
 
 <style lang="scss">
+@import 'src/styles/variable';
+@import 'src/styles/bootstrap-light';
+
 #app {
+  width: 100vw;
+  height: 100vh;
+  padding-top: 24px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  overflow: auto;
+  background: rgb(255,213,124);
+  background: linear-gradient(0deg, rgba(255,213,124,1) 0%, rgba(134,124,255,1) 100%);
 }
 </style>

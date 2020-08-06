@@ -1,1 +1,2 @@
-export * as locale from './locale';
+export { localeMixin } from './locale';
+export { eventsMixin } from './events';
